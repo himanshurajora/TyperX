@@ -3,7 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import app from './init'
 import Navbar from '../components/Navbar/Navbar'
-
+import Data from './data.json'
 declare interface CodeBlock {
   character: string
   // Here C = yes the chracter has been attempted and correct # Currect
@@ -42,12 +42,16 @@ function App() {
 
   // use effect of first load
   useEffect(() => {
-    fetch("/src/data.json").then((res) => {
-      res.json().then((data) => {
-        setLanguages(data['languages'])
-        setPrograms(data['programlist'])
-      })
-    })
+    // with api
+    // fetch("/src/data.json").then((res) => {
+    //   res.json().then((data) => {
+    //     setLanguages(data['languages'])
+    //     setPrograms(data['programlist'])
+    //   })
+    // })
+    // without api
+    setLanguages(Data['languages'])
+    setPrograms(Data['programlist'])
   }, [])
 
   // use effect whever the code string changes
@@ -79,12 +83,15 @@ function App() {
   // set the code and codeBlocks
   const setInit = ()=>{
     if (currentLanguage && currentProgram) {
-      fetch("/src/data.json").then((res) => {
-        res.json().then((data) => {
-          setCode(data[currentLanguage][currentProgram]['code'])
-          setDescription(data[currentLanguage][currentProgram]['description'])
-        })
-      })
+      // fetch("/src/data.json").then((res) => {
+      //   res.json().then((data) => {
+      //     setCode(data[currentLanguage][currentProgram]['code'])
+      //     setDescription(data[currentLanguage][currentProgram]['description'])
+      //   })
+      // })
+      // console.log(Data)
+      setCode((Data as any)[currentLanguage][currentProgram]['code'])
+      setDescription((Data as any)[currentLanguage][currentProgram]['description'])
     }
     textArea.current.focus()
   }
