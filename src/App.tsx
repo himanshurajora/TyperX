@@ -9,10 +9,14 @@ declare interface CodeBlock {
   // Here C = yes the chracter has been attempted and correct # Currect
   // Here I  the caracter has been attempted but is wrongly typed # Incorrect
   // U = The character has no been attempted yet # Unattempted
-  status: "C" | "I" | "U"
+  // R = THe charater that has to be written right now or the current index # current index
+  status: "C" | "I" | "U" | "R"
 }
 function App() {
-  const [code, setCode] = useState("void main")
+  var init = `void main(){
+\tstring("Hello World");
+}`
+  const [code, setCode] = useState(init)
   const [codeMap, setCodeMap] = useState<CodeBlock[]>([])
   var currentIndexRef = useRef(0)
   var modelRef = useRef<any>()
@@ -52,7 +56,7 @@ function App() {
   const handleCodeDown = (e: any) => {
     let currentIndex = currentIndexRef.current
     console.log(currentIndex)
-    if (currentIndex < codeMap.length-1) {
+    if (currentIndex < codeMap.length) {
       if (e.key === "Tab") {
         e.preventDefault()
       }
@@ -62,17 +66,17 @@ function App() {
       if (e.key === "Enter" && codeMap[currentIndex].character === "\n") {
         // If the user has pressed enter then we need to move the cursor to the next line
         // We need to find the next line
-        codeMap[currentIndex].status = "C"
+        codeMap[currentIndex++].status = "C"
+        codeMap[currentIndex].status = "R"
         setCodeMap([...codeMap])
-        currentIndex++
         currentIndexRef.current = currentIndex
         return
       } else if (e.key === "Tab" && codeMap[currentIndex].character === "\t") {
         // If the user has pressed enter then we need to move the cursor to the next line
         // We need to find the next line
-        codeMap[currentIndex].status = "C"
+        codeMap[currentIndex++].status = "C"
+        codeMap[currentIndex].status = "R"
         setCodeMap([...codeMap])
-        currentIndex++
         currentIndexRef.current = currentIndex
         return
       }
@@ -82,6 +86,8 @@ function App() {
           currentIndex = 0
         }
         codeMap[currentIndex].status = "U"
+        codeMap[currentIndex].status = "R"
+        codeMap[currentIndex + 1].status = "U"
         setCodeMap([...codeMap])
         currentIndexRef.current = currentIndex
         return
@@ -90,10 +96,12 @@ function App() {
       else if (e.key === codeMap[currentIndex].character) {
         // Correct
         codeMap[currentIndex++].status = "C"
+        codeMap[currentIndex] ? codeMap[currentIndex].status = "R" : null
         setCodeMap([...codeMap])
       } else {
         // Incorrect
         codeMap[currentIndex++].status = "I"
+        codeMap[currentIndex] ? codeMap[currentIndex].status = "R" : null
         setCodeMap([...codeMap])
       }
     }
@@ -103,7 +111,8 @@ function App() {
         currentIndex = 0
         currentIndexRef.current = currentIndex
         textArea.current.value = ""
-        setCode(code + " ")
+        var currentCode = code;
+        setCode('console.log("Hello World");')
       }, 300);
 
     }
@@ -116,25 +125,30 @@ function App() {
       <div className="hero is-small">
         <br />
       </div>
-      <div className="container">
+      <div className="container" style={{ "minHeight": "60vh", "maxHeight": "70vh", "overflow": "scroll" }}>
         {
           codeMap.map((codeBlock, index) => {
             if (codeBlock.character === "\n") {
               if (codeBlock.status === "U") {
-                return (<span key={index} ><span className="button is-white"> ENTER</span> <br /></span>)
+                return (<span key={index} ><span className={"button is-light"}> ENTER</span> <br /></span>)
               } else if (codeBlock.status === "C") {
                 return (<span key={index} ><span className="button is-success"> ENTER</span> <br /></span>)
-              } else {
+              } else if (codeBlock.status === "R") {
+                return (<span key={index} ><span className="button is-warning"> ENTER</span> <br /></span>)
+              }
+              else {
                 return (<span key={index} ><span className="button is-danger"> ENTER</span> <br /></span>)
               }
             }
             else if (codeBlock.character === "\t") {
               if (codeBlock.status === "U") {
-                return (<span key={index} ><span className="button is-white"> T_A_B</span></span>)
+                return (<span key={index} ><span className="button is-light"> T A B</span></span>)
               } else if (codeBlock.status === "C") {
-                return (<span key={index} ><span className="button is-success"> TAB</span> </span>)
+                return (<span key={index} ><span className="button is-success"> T A B</span> </span>)
+              } else if (codeBlock.status === "R") {
+                return (<span key={index} ><span className="button is-warning"> T A B</span> <br /></span>)
               } else {
-                return (<span key={index} ><span className="button is-danger"> TAB</span> </span>)
+                return (<span key={index} ><span className="button is-danger"> T A B</span> </span>)
               }
             }
             else {
@@ -142,6 +156,8 @@ function App() {
                 return (<span key={index} className='button is-white mx-1 codeblock' style={{ "textTransform": "none" }}>{codeBlock.character}</span>)
               } else if (codeBlock.status === "C") {
                 return (<span key={index} className='button is-success is-light is-outlined codeblock mx-1' style={{ "textTransform": "none" }}>{codeBlock.character}</span>)
+              } else if (codeBlock.status === "R") {
+                return (<span key={index} className='button is-warning is-light is-outlined codeblock mx-1' style={{ "textTransform": "none" }}>{codeBlock.character}</span>)
               } else {
                 return (<span key={index} className='button is-danger is-light is-outlined codeblock mx-1' style={{ "textTransform": "none" }}>{codeBlock.character}</span>)
               }
@@ -150,9 +166,17 @@ function App() {
           })
         }
       </div>
+      <div className="container">
+        {
+          codeMap.map((codeBlock, index) => {
+            return <span>{codeBlock.status}</span>
+          })
+
+        }
+      </div>
       <div className="section">
         <div className="container">
-          <textarea name="" id="" autoComplete={"false"} autoFocus={true} ref={textArea} onKeyDown={handleCodeDown} className='input' style={{ height: "100px", "visibility": "visible" }}></textarea>
+          <textarea name="" id="" autoComplete={"false"} placeholder='Start Typing Here...' autoFocus={true} ref={textArea} onKeyDown={handleCodeDown} className='input' style={{ height: "100px", "visibility": "visible", "userSelect": "none" }}></textarea>
         </div>
       </div>
       <div className="modal" ref={modelRef}>
@@ -162,10 +186,10 @@ function App() {
             <h1 className="title is-1 py-4">Test Completed!</h1>
             <h2 className="subtitle">
               <div className="buttons has-addons">
-                <button className="button is-large is-primary">
+                <button className="button is-medium is-primary">
                   Retry 🔃
                 </button>
-                <button className="button is-large is-success">
+                <button className="button is-medium is-success">
                   Next ⏭️
                 </button>
               </div>
