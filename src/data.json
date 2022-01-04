@@ -1,0 +1,61 @@
+{
+    "languages": [
+        "JavaScript",
+        "TypeScript",
+        "C",
+        "C++",
+        "C#",
+        "Python",
+        "Java"
+    ],
+    "programlist": [
+        "Hello World",
+        "FizzBuzz"
+    ],
+    "JavaScript": {
+        "Hello World": {
+            "discription": "The Hello World Program In JavaScript",
+            "code": "// This program will print the string \"Hello World\" to the console, written in JavaScript.\nconsole.log(\"Hello World\");"
+        },
+        "FizzBuzz": {
+            "discription": "The FizzBuzz Program In JavaScript",
+            "code": "// This program will print the numbers from 1 to 100. If the number is divisible by 3, it will print \"Fizz\". If the number is divisible by 5, it will print \"Buzz\". If the number is divisible by both 3 and 5, it will print \"FizzBuzz\".\nfor(var i=1; i<=100; i++){\n\tif(i%3==0 && i%5==0) {\n\t\tconsole.log(\"FizzBuzz\");\n\t}\n\telse if(i%3==0){\n\t\tconsole.log(\"Fizz\");\n\t}\n\telse if(i%5==0){\n\t\tconsole.log(\"Buzz\");\n\t}\n\telse{\n\t\tconsole.log(i);\n\t}\n}\n"
+        }
+    },
+    "TypeScript": {
+        "Hello World": {
+            "discription": "The Hello World Program In TypeScript",
+            "code": "// This program will print the string \"Hello World\" to the console, written in TypeScript.\nconsole.log(\"Hello World\");"
+        }
+    },
+    "C": {
+        "Hello World": {
+            "discription": "The Hello World Program In C",
+            "code": "// This program will print the string \"Hello World\" to the console, written in C.\n#include <stdio.h>\nint main()\n{\n\tprintf(\"Hello World\\n\");\n\treturn 0;\n}"
+        }
+    },
+    "C++": {
+        "Hello World": {
+            "discription": "The Hello World Program In C++",
+            "code": "// This program will print the string \"Hello World\" to the console, written in C++.\n#include <iostream>\nint main()\n{\n\tcout << \"Hello World\" << endl;\n\treturn 0;\n}"
+        }
+    },
+    "C#": {
+        "Hello World": {
+            "discription": "The Hello World Program In C#",
+            "code": "// This program will print the string \"Hello World\" to the console, written in C#.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tConsole.WriteLine(\"Hello World\");\n\t}\n}"
+        }
+    },
+    "Python": {
+        "Hello World": {
+            "discription": "The Hello World Program In Python",
+            "code": "// This program will print the string \"Hello World\" to the console, written in Python.\nprint(\"Hello World\")"
+        }
+    },
+    "Java": {
+        "Hello World": {
+            "discription": "The Hello World Program In Java",
+            "code": "// This program will print the string \"Hello World\" to the console, written in Java.\npublic class HelloWorld\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tSystem.out.println(\"Hello World\");\n\t}\n}"
+        }
+    }
+}

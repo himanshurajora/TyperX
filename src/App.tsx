@@ -13,10 +13,17 @@ declare interface CodeBlock {
   status: "C" | "I" | "U" | "R"
 }
 function App() {
-  var init = `void main`
-  const [code, setCode] = useState(init)
+  const initText = "Hello There!\nWelcome to TyperX, Learn By Typing\nYou Can Either Select A Perticular Programming Language And A Program Or You Can Start Typing This Paragraph As Well"
+  const [code, setCode] = useState(initText)
   const [codeMap, setCodeMap] = useState<CodeBlock[]>([])
+  const [codeText, setCodeText] = useState("")
+  const [languages, setLanguages] = useState<string[]>([])
+  const [programs, setPrograms] = useState<string[]>([])
+  const [currentLanguage, setCurrentLanguage] = useState("")
+  const [currentProgram, setCurrentProgram] = useState("")
+  const [description, setDescription] = useState("")
   var currentIndexRef = useRef(0)
+  var totalWords = useRef(0)
   var modelRef = useRef<any>()
   var modelCloseButtonRef = useRef<any>()
   var textArea = useRef<any>()
@@ -32,6 +39,18 @@ function App() {
     "ArrowUp",
     "ArrowDown",
   ]
+
+  // use effect of first load
+  useEffect(() => {
+    fetch("/src/data.json").then((res) => {
+      res.json().then((data) => {
+        setLanguages(data['languages'])
+        setPrograms(data['programlist'])
+      })
+    })
+  }, [])
+
+  // use effect whever the code string changes
   useEffect(() => {
     // Make the code map from code string 
     let tempCodeMap: CodeBlock[] = []
@@ -39,82 +58,87 @@ function App() {
       // current code block 
       var codeBlock: CodeBlock = {
         character: char,
-        status: "U"
+        status: "U",
       }
 
       tempCodeMap.push(codeBlock)
     })
-
+    totalWords.current = code.split(/ |\n/).length
+    tempCodeMap[0].status = "R"
     setCodeMap(tempCodeMap)
 
   }, [code])
 
+  // use effect when the current language or the current program changes
+  useEffect(() => {
+    setCodeText('')
+    setInit()
+  }, [currentLanguage, currentProgram])
 
+
+  // set the code and codeBlocks
+  const setInit = ()=>{
+    if (currentLanguage && currentProgram) {
+      fetch("/src/data.json").then((res) => {
+        res.json().then((data) => {
+          setCode(data[currentLanguage][currentProgram]['code'])
+          setDescription(data[currentLanguage][currentProgram]['description'])
+        })
+      })
+    }
+    textArea.current.focus()
+  }
 
   const handleCodeDown = (e: any) => {
     let currentIndex = currentIndexRef.current
-    console.log(currentIndex)
-    if (currentIndex < codeMap.length) {
+
+    if (ignoredKeys.includes(e.key)) {
+      return
+    }
+    if (currentIndex < codeMap.length - 1) {
       if (e.key === "Tab") {
         e.preventDefault()
-      }
-      if (ignoredKeys.includes(e.key)) {
-        return
-      }
-      if (e.key === "Enter" && codeMap[currentIndex].character === "\n") {
-        // If the user has pressed enter then we need to move the cursor to the next line
-        // We need to find the next line
-        codeMap[currentIndex++].status = "C"
-        codeMap[currentIndex].status = "R"
-        setCodeMap([...codeMap])
-        currentIndexRef.current = currentIndex
-        return
-      } else if (e.key === "Tab" && codeMap[currentIndex].character === "\t") {
-        // If the user has pressed enter then we need to move the cursor to the next line
-        // We need to find the next line
-        codeMap[currentIndex++].status = "C"
-        codeMap[currentIndex].status = "R"
-        setCodeMap([...codeMap])
-        currentIndexRef.current = currentIndex
-        return
-      }
-      else if (e.key === "Backspace") {
+        if (codeMap[currentIndex].character === "\t") {
+          codeMap[currentIndex++].status = "C"
+          codeMap[currentIndex].status = "R"
+        }
+        setCodeText(codeText + "        ")
+      } else if (e.key === "Backspace") {
         currentIndex--
         if (currentIndex < 0) {
           currentIndex = 0
         }
-        codeMap[currentIndex].status = "U"
-        codeMap[currentIndex].status = "R"
         codeMap[currentIndex + 1].status = "U"
-        setCodeMap([...codeMap])
-        currentIndexRef.current = currentIndex
-        return
-      }
+        codeMap[currentIndex].status = "R"
 
+        setCodeMap([...codeMap])
+      }
       else if (e.key === codeMap[currentIndex].character) {
-        // Correct
         codeMap[currentIndex++].status = "C"
-        codeMap[currentIndex] ? codeMap[currentIndex].status = "R" : null
+        codeMap[currentIndex].status = "R"
         setCodeMap([...codeMap])
       } else {
-        // Incorrect
         codeMap[currentIndex++].status = "I"
-        codeMap[currentIndex] ? codeMap[currentIndex].status = "R" : null
+        codeMap[currentIndex].status = "R"
         setCodeMap([...codeMap])
+
+      }
+    } else {
+      if (e.key === codeMap[currentIndex].character) {
+        codeMap[currentIndex].status = "C"
+      } else {
+        codeMap[currentIndex].status = "I"
       }
     }
-    else {
-      setTimeout(() => {
-        modelRef.current.classList.add("is-active")
-        currentIndex = 0
-        currentIndexRef.current = currentIndex
-        textArea.current.value = ""
-        var currentCode = code;
-        setCode('// this is the hello world program in JavaScript\nconsole.log("Hello World");')
-      }, 300);
 
-    }
     currentIndexRef.current = currentIndex
+  }
+
+  const handleReset = () => {
+    currentIndexRef.current = 0
+    setCode(' ')
+    setCodeText(' ')
+    setInit()
   }
 
   return (
@@ -122,17 +146,71 @@ function App() {
       <Navbar></Navbar>
       <div className="hero is-small">
         <br />
+        <div className="container">
+          <div className="columns">
+            <div className="column">
+              <div className="control has-icons-left">
+                <div className="select">
+                  <select value={currentLanguage} onChange={(e) => { setCurrentLanguage(e.target.value) }}>
+                    <option value={""}>Select Language</option>
+                    {
+                      languages.map((language, index) => {
+                        return <option key={index}>{language}</option>
+                      })
+                    }
+                  </select>
+                </div>
+                <div className="icon is-small is-left">
+                  <p>🖥️</p>
+                </div>
+              </div>
+            </div>
+            <div className="column">
+              <div className="control has-icons-left">
+                <div className="select">
+                  <select value={currentProgram} onChange={(e) => { setCurrentProgram(e.target.value) }}>
+                    <option value={""}>Select Program</option>
+                    {
+                      programs.map((program, index) => {
+                        return <option key={index}>{program}</option>
+                      })
+                    }
+                  </select>
+                </div>
+                <div className="icon is-small is-left">
+                  <p>🖥️</p>
+                </div>
+              </div>
+            </div>
+            <div className="column">
+              <button className='button is-danger' onClick={handleReset}>Reset</button>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div className="container" style={{ "minHeight": "60vh", "maxHeight": "70vh", "overflow": "scroll" }}>
+      <br />
+      <div className="container notification" style={{ "minHeight": "50vh", "maxHeight": "50vh", "overflow": "scroll" }}>
         {
           codeMap.map((codeBlock, index) => {
+            if (codeBlock.character === "\n") {
+              return <span key={index} className={`subtitle is-5 ${codeBlock.status == "C" ? "has-background-success has-text-light" : codeBlock.status == "I" ? "has-background-danger has-text-light" : codeBlock.status == "R" ? "current has-background-warning has-text-white" : "has-background-white has-text-black"}`}>  <br /> </span>
+            } else if (codeBlock.character === " ") {
+              return <span key={index} className={`subtitle is-5 ${codeBlock.status == "C" ? "has-background-success has-text-light" : codeBlock.status == "I" ? "has-background-danger has-text-light" : codeBlock.status == "R" ? "current has-background-warning has-text-white" : "has-background-white has-text-black"}`}>&nbsp;</span>
+            } else if (codeBlock.character === "\t") {
+              return <span key={index} className={`subtitle is-5 ${codeBlock.status == "C" ? "has-background-success has-text-light" : codeBlock.status == "I" ? "has-background-danger has-text-light" : codeBlock.status == "R" ? "current has-background-warning has-text-white" : "has-background-white has-text-black"}`}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            } else {
+              return <span key={index} className={`subtitle is-5 ${codeBlock.status == "C" ? "has-background-success has-text-light" : codeBlock.status == "I" ? "has-background-danger has-text-light" : codeBlock.status == "R" ? "current has-background-warning has-text-white" : "has-background-white has-text-black"}`}>{codeBlock.character}</span>
+
+            }
 
           })
         }
+
       </div>
       <div className="section">
         <div className="container">
-          <textarea name="" id="" autoComplete={"false"} placeholder='Start Typing Here...' autoFocus={true} ref={textArea} onKeyDown={handleCodeDown} className='input' style={{ height: "100px", "visibility": "visible", "userSelect": "none" }}></textarea>
+          <textarea name="" id="" value={codeText} onChange={(e) => { setCodeText(e.target.value) }} autoComplete={"false"} placeholder='Start Typing Here...' autoFocus={true} ref={textArea} onKeyDown={handleCodeDown} className='input' style={{ height: "150px", "visibility": "visible", "userSelect": "none" }}></textarea>
         </div>
       </div>
       <div className="modal" ref={modelRef}>
@@ -160,28 +238,3 @@ function App() {
 }
 
 export default App
-
-/*
-var current = 0;
-document.addEventListener("keydown", (e) => {
-  if(current == string.length-1){
-    current == string.length-1
-    console.log("The code is done guys")
-  }
-  if(e.key == "Backspace"){
-    console.log(current)
-    if(current <= 0) current = 0
-    else current--
-  }
-  if(e.key == string[current]){
-    console.log("yes")
-    console.log(e.key, ": ", string[current])
-    current++
-  }else{
-    console.log(e.key, ": ", string[current])
-
-    console.log("no")
-  }
-})
-
-*/

@@ -10,3 +10,28 @@
   flex-direction: column;
   justify-content: center;
 }
+
+::-webkit-scrollbar {
+    width: 10px
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 3px
+}
+
+::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 3px
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #88df60
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(179, 255, 155)
+}
+
+.current{
+    text-decoration: underline;
+}
