@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import logo from './logo.svg'
+// import logo from '../../src/logo.svg'
 import './App.css'
-import app from './init'
-import Navbar from '../components/Navbar/Navbar'
+// import app from './init'
+import Navbar from '../Navbar/Navbar'
 
 declare interface CodeBlock {
   character: string
@@ -126,7 +126,40 @@ function App() {
       <div className="container" style={{ "minHeight": "60vh", "maxHeight": "70vh", "overflow": "scroll" }}>
         {
           codeMap.map((codeBlock, index) => {
+            if (codeBlock.character === "\n") {
+              if (codeBlock.status === "U") {
+                return (<span key={index} ><span className={"button is-light"}> ENTER</span> <br /></span>)
+              } else if (codeBlock.status === "C") {
+                return (<span key={index} ><span className="button is-success"> ENTER</span> <br /></span>)
+              } else if (codeBlock.status === "R") {
+                return (<span key={index} ><span className="button is-warning"> ENTER</span> <br /></span>)
+              }else {
+                return (<span key={index} ><span className="button is-danger"> ENTER</span> <br /></span>)
+              }
+            }
+            else if (codeBlock.character === "\t") {
+              if (codeBlock.status === "U") {
+                return (<span key={index} ><span className="button is-light"> T A B</span></span>)
+              } else if (codeBlock.status === "C") {
+                return (<span key={index} ><span className="button is-success"> T A B</span> </span>)
+              } else if (codeBlock.status === "R") {
+                return (<span key={index} ><span className="button is-warning"> T A B</span> </span>)
+              } else {
+                return (<span key={index} ><span className="button is-danger"> T A B</span> </span>)
+              }
+            }
+            else {
+              if (codeBlock.status === "U") {
+                return (<span key={index} className='button is-white mx-1 codeblock' style={{ "textTransform": "none" }}>{codeBlock.character}</span>)
+              } else if (codeBlock.status === "C") {
+                return (<span key={index} className='button is-success is-light is-outlined codeblock mx-1' style={{ "textTransform": "none" }}>{codeBlock.character}</span>)
+              } else if (codeBlock.status === "R") {
+                return (<span key={index} className='button is-warning is-light is-outlined codeblock mx-1' style={{ "textTransform": "none" }}>{codeBlock.character}</span>)
+              } else {
+                return (<span key={index} className='button is-danger is-light is-outlined codeblock mx-1' style={{ "textTransform": "none" }}>{codeBlock.character}</span>)
+              }
 
+            }
           })
         }
       </div>
