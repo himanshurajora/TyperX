@@ -10,10 +10,16 @@
     ],
     "programlist": [
         "Hello World",
-        "FizzBuzz",
         "Arithimetic Operators",
         "Conditional Statements",
-        "Loops"
+        "Loops",
+        "Arrays",
+        "Functions",
+        "Classes"
+    ],
+    "excluded":[
+        "FizzBuzz",
+        "Objects"
     ],
     "JavaScript": {
         "Hello World": {
@@ -35,6 +41,22 @@
         "Loops":{
             "discription": "The Loops Program In JavaScript",
             "code": "// This program will print the numbers from 1 to 10.\nfor(var i=1; i<=10; i++){\n\tconsole.log(i);\n}\n"
+        },
+        "Functions":{
+            "discription": "The Functions Program In JavaScript",
+            "code": "// This program will print the numbers from 1 to 10.\nfunction printNumbers(start, end){\n\tfor(var i=start; i<=end; i++){\n\t\tconsole.log(i);\n\t}\n}\nprintNumbers(1, 10);"
+        },
+        "Objects":{
+            "discription": "The Objects Program In JavaScript",
+            "code": "// This program will print the numbers from 1 to 10.\nvar obj = {\n\tstart: 1,\n\tend: 10,\n\tprintNumbers: function(){\n\t\tfor(var i=this.start; i<=this.end; i++){\n\t\t\tconsole.log(i);\n\t\t}\n\t}\n};\nobj.printNumbers();"
+        },
+        "Classes":{
+            "discription": "The Classes Program In JavaScript",
+            "code": "// This program will print the numbers from 1 to 10.\nclass MyClass{\n\tconstructor(start, end){\n\t\tthis.start = start;\n\t\tthis.end = end;\n\t}\n\tprintNumbers(){\n\t\tfor(var i=this.start; i<=this.end; i++){\n\t\t\tconsole.log(i);\n\t\t}\n\t}\n}\nvar obj = new MyClass(1, 10);\nobj.printNumbers();"
+        },
+        "Arrays":{
+            "discription": "The Array Program In JavaScript",
+            "code": "// This program will print the numbers from 1 to 10.\nvar arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\nfor(var i=0; i<arr.length; i++){\n\tconsole.log(arr[i]);\n}\n"
         }
     },
     "TypeScript": {
@@ -48,15 +70,31 @@
         },
         "Arithimetic Operators": {
             "discription": "The Arithimetic Operators Program In TypeScript",
-            "code": "// This program will print the sum of two numbers.\nvar num1 = 5;\nvar num2 = 10;\nvar sum = num1 + num2;\nconsole.log(\"The sum of \" + num1 + \" and \" + num2 + \" is \" + sum);"
+            "code": "// This program will print the sum of two numbers.\nvar num1 : number = 5;\nvar num2 : number = 10;\nvar sum : number = num1 + num2;\nconsole.log(\"The sum of \" + num1 + \" and \" + num2 + \" is \" + sum);"
         },
         "Conditional Statements":{
             "discription": "The Conditional Statements Program In TypeScript",
-            "code" : "// This program will compare two numbers and print the larger number.\nvar num1 = 5;\nvar num2 = 10;\nif(num1 > num2){\n\tconsole.log(\"The larger number is \" + num1);\n}\nelse{\n\tconsole.log(\"The larger number is \" + num2);\n}\n"
+            "code" : "// This program will compare two numbers and print the larger number.\nvar num1 : number = 5;\nvar num2 : number = 10;\nif(num1 > num2){\n\tconsole.log(\"The larger number is \" + num1);\n}\nelse{\n\tconsole.log(\"The larger number is \" + num2);\n}\n"
         },
         "Loops":{
             "discription": "The Loops Program In TypeScript",
             "code": "// This program will print the numbers from 1 to 10.\nfor(var i=1; i<=10; i++){\n\tconsole.log(i);\n}\n"
+        },
+        "Functions":{
+            "discription": "The Functions Program In TypeScript",
+            "code": "// This program will print the numbers from 1 to 10.\nfunction printNumbers(start : number, end : number){\n\tfor(var i=start; i<=end; i++){\n\t\tconsole.log(i);\n\t}\n}\nprintNumbers(1, 10);"
+        },
+        "Objects":{
+            "discription": "The Objects Program In TypeScript",
+            "code": "// This program will print the numbers from 1 to 10.\nvar obj = {\n\tstart : 1,\n\tend : 10,\n\tprintNumbers : function(){\n\t\tfor(var i=this.start; i<=this.end; i++){\n\t\t\tconsole.log(i);\n\t\t}\n\t}\n};\nobj.printNumbers();"
+        },
+        "Classes":{
+            "discription": "The Classes Program In TypeScript",
+            "code": "// This program will print the numbers from 1 to 10.\nclass MyClass{\n\tconstructor(start : number, end : number){\n\t\tthis.start = start;\n\t\tthis.end = end;\n\t}\n\tprintNumbers(){\n\t\tfor(var i=this.start; i<=this.end; i++){\n\t\t\tconsole.log(i);\n\t\t}\n\t}\n}\nvar obj = new MyClass(1, 10);\nobj.printNumbers();"
+        },
+        "Arrays":{
+            "discription": "The Array Program In TypeScript",
+            "code": "// This program will print the numbers from 1 to 10.\nvar arr : number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\nfor(var i=0; i<arr.length; i++){\n\tconsole.log(arr[i]);\n}\n"
         }
     },
     "C": {
@@ -79,6 +117,22 @@
         "Loops":{
             "discription": "The Loops Program In C",
             "code": "// This program will print the numbers from 1 to 10.\n#include <stdio.h>\nint main()\n{\n\tfor(int i=1; i<=10; i++)\n\t{\n\t\tprintf(\"%d\\n\", i);\n\t}\n\treturn 0;\n}"
+        },
+        "Functions":{
+            "discription": "The Functions Program In C",
+            "code": "// This program will print the numbers from 1 to 10.\n#include <stdio.h>\nint printNumbers(int start, int end)\n{\n\tfor(int i=start; i<=end; i++)\n\t{\n\t\tprintf(\"%d\\n\", i);\n\t}\n}\nint main()\n{\n\tprintNumbers(1, 10);\n\treturn 0;\n}"
+        },
+        "Objects":{
+            "discription": "The Objects Program In C",
+            "code": "// This program will print the numbers from 1 to 10.\n#include <stdio.h>\nint main()\n{\n\tstruct obj\n\t{\n\t\tint start;\n\t\tint end;\n\t\tvoid printNumbers()\n\t\t{\n\t\t\tfor(int i=start; i<=end; i++)\n\t\t\t{\n\t\t\t\tprintf(\"%d\\n\", i);\n\t\t\t}\n\t\t}\n\t};\n\tstruct obj obj;\n\tobj.start = 1;\n\tobj.end = 10;\n\tobj.printNumbers();\n\treturn 0;\n}"
+        },
+        "Classes":{
+            "discription": "The Class Program in C",
+            "code": "// The C programming language does not support class but it can be simulated using struct.\n#include <stdio.h>\nstruct MyClass\n{\n\tint start;\n\tint end;\n\tvoid printNumbers()\n\t{\n\t\tfor(int i=start; i<=end; i++)\n\t\t{\n\t\t\tprintf(\"%d\\n\", i);\n\t\t}\n\t}\n};\nint main()\n{\n\tstruct MyClass obj;\n\tobj.start = 1;\n\tobj.end = 10;\n\tobj.printNumbers();\n\treturn 0;\n}"
+        },
+        "Arrays":{
+            "discription": "The Arrays Program in C",
+            "code": "// This program will print the numbers from 1 to 10.\n#include <stdio.h>\nint main()\n{\n\tint arr[10];\n\tfor(int i=0; i<10; i++)\n\t{\n\t\tarr[i] = i+1;\n\t}\n\tfor(int i=0; i<10; i++)\n\t{\n\t\tprintf(\"%d\\n\", arr[i]);\n\t}\n\treturn 0;\n}"
         }
     },
     "C++": {
@@ -101,6 +155,22 @@
         "Loops":{
             "discription": "The Loops Program In C++",
             "code": "// This program will print the numbers from 1 to 10.\n#include <iostream>\nint main()\n{\n\tfor(int i=1; i<=10; i++)\n\t{\n\t\tcout << i << endl;\n\t}\n\treturn 0;\n}"
+        },
+        "Functions":{
+            "discription": "The Functions Program In C++",
+            "code": "// This program will print the numbers from 1 to 10.\n#include <iostream>\nint printNumbers(int start, int end)\n{\n\tfor(int i=start; i<=end; i++)\n\t{\n\t\tcout << i << endl;\n\t}\n}\nint main()\n{\n\tprintNumbers(1, 10);\n\treturn 0;\n}"
+        },
+        "Objects":{
+            "discription": "The Objects Program In C++",
+            "code": "// This program will print the numbers from 1 to 10.\n#include <iostream>\nstruct obj\n{\n\tint start;\n\tint end;\n\tvoid printNumbers()\n\t{\n\t\tfor(int i=start; i<=end; i++)\n\t\t{\n\t\t\tcout << i << endl;\n\t\t}\n\t}\n};\nint main()\n{\n\tstruct obj obj;\n\tobj.start = 1;\n\tobj.end = 10;\n\tobj.printNumbers();\n\treturn 0;\n}"
+        },
+        "Classes":{
+            "discription": "The Classes Program In C++",
+            "code": "// This program will print the numbers from 1 to 10.\n#include <iostream>\nstruct obj\n{\n\tint start;\n\tint end;\n\tvoid printNumbers()\n\t{\n\t\tfor(int i=start; i<=end; i++)\n\t\t{\n\t\t\tcout << i << endl;\n\t\t}\n\t}\n};\nint main()\n{\n\tstruct obj obj;\n\tobj.start = 1;\n\tobj.end = 10;\n\tobj.printNumbers();\n\treturn 0;\n}"
+        },
+        "Arrays":{
+            "discription": "The Arrays Program In C++",
+            "code": "// This program will print the numbers from 1 to 10.\n#include <iostream>\nint main()\n{\n\tint arr[10];\n\tfor(int i=0; i<10; i++)\n\t{\n\t\tarr[i] = i+1;\n\t}\n\tfor(int i=0; i<10; i++)\n\t{\n\t\tcout << arr[i] << endl;\n\t}\n\treturn 0;\n}"
         }
     },
     "C#": {
@@ -122,6 +192,22 @@
         },
         "Loops":{
             "discription": "The Loops Program In C#",
+            "code": "// This program will print the numbers from 1 to 10.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tfor(int i=1; i<=10; i++)\n\t\t{\n\t\t\tConsole.WriteLine(i);\n\t\t}\n\t}\n}"
+        },
+        "Functions":{
+            "discription": "The Functions Program In C#",
+            "code": "// This program will print the numbers from 1 to 10.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tfor(int i=1; i<=10; i++)\n\t\t{\n\t\t\tConsole.WriteLine(i);\n\t\t}\n\t}\n}"
+        },
+        "Objects":{
+            "discription": "The Objects Program In C#",
+            "code": "// This program will print the numbers from 1 to 10.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tobj obj;\n\t\tobj.start = 1;\n\t\tobj.end = 10;\n\t\tobj.printNumbers();\n\t}\n}\nstruct obj\n{\n\tint start;\n\tint end;\n\tvoid printNumbers()\n\t{\n\t\tfor(int i=start; i<=end; i++)\n\t\t{\n\t\t\tcout << i << endl;\n\t\t}\n\t}\n}"
+        },
+        "Classes":{
+            "discription": "The Classes Program In C#",
+            "code": "// This program will print the numbers from 1 to 10.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tfor(int i=1; i<=10; i++)\n\t\t{\n\t\t\tConsole.WriteLine(i);\n\t\t}\n\t}\n}"
+        },
+        "Arrays":{
+            "discription": "The Arrays Program In C#",
             "code": "// This program will print the numbers from 1 to 10.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tfor(int i=1; i<=10; i++)\n\t\t{\n\t\t\tConsole.WriteLine(i);\n\t\t}\n\t}\n}"
         }
     },
@@ -145,6 +231,22 @@
         "Loops":{
             "discription": "The Loops Program In Python",
             "code": "// This program will print the numbers from 1 to 10.\nfor i in range(1,11):\n\tprint(i)"
+        },
+        "Functions":{
+            "discription": "The Functions Program In Python",
+            "code": "// This program will print the numbers from 1 to 10.\ndef printNumbers():\n\tfor i in range(1,11):\n\t\tprint(i)\nprintNumbers()"
+        },
+        "Objects":{
+            "discription": "The Objects Program In Python",
+            "code": "// This program will print the numbers from 1 to 10.\nclass obj:\n\tdef __init__(self, start, end):\n\t\tself.start = start\n\t\tself.end = end\n\tdef printNumbers(self):\n\t\tfor i in range(self.start, self.end+1):\n\t\t\tprint(i)\nobj1 = obj(1,10)\nobj1.printNumbers()"
+        },
+        "Classes":{
+            "discription": "The Classes Program In Python",
+            "code": "// This program will print the numbers from 1 to 10.\nclass obj:\n\tdef __init__(self, start, end):\n\t\tself.start = start\n\t\tself.end = end\n\tdef printNumbers(self):\n\t\tfor i in range(self.start, self.end+1):\n\t\t\tprint(i)\nobj1 = obj(1,10)\nobj1.printNumbers()"
+        },
+        "Arrays":{
+            "discription": "The Arrays Program In Python",
+            "code": "// This program will print the numbers from 1 to 10.\nfor i in range(1,11):\n\tprint(i)"
         }
     },
     "Java": {
@@ -167,6 +269,22 @@
         "Loops":{
             "discription": "The Loops Program In Java",
             "code": "// This program will print the numbers from 1 to 10.\npublic class Loops\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tfor(int i=1; i<=10; i++)\n\t\t{\n\t\t\tSystem.out.println(i);\n\t\t}\n\t}\n}"
+        },
+        "Functions":{
+            "discription": "The Functions Program In Java",
+            "code": "// This program will print the numbers from 1 to 10.\npublic class Functions\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tprintNumbers();\n\t}\n\tpublic static void printNumbers()\n\t{\n\t\tfor(int i=1; i<=10; i++)\n\t\t{\n\t\t\tSystem.out.println(i);\n\t\t}\n\t}\n}"
+        },
+        "Objects":{
+            "discription": "The Objects Program In Java",
+            "code": "// This program will print the numbers from 1 to 10.\npublic class Objects\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tobj obj1 = new obj(1,10);\n\t\tobj1.printNumbers();\n\t}\n}\nclass obj\n{\n\tint start, end;\n\tpublic obj(int start, int end)\n\t{\n\t\tthis.start = start;\n\t\tthis.end = end;\n\t}\n\tpublic void printNumbers()\n\t{\n\t\tfor(int i=start; i<=end; i++)\n\t\t{\n\t\t\tSystem.out.println(i);\n\t\t}\n\t}\n}"
+        },
+        "Classes":{
+            "discription": "The Classes Program In Java",
+            "code": "// This program will print the numbers from 1 to 10.\npublic class Classes\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tobj obj1 = new obj(1,10);\n\t\tobj1.printNumbers();\n\t}\n}\nclass obj\n{\n\tint start, end;\n\tpublic obj(int start, int end)\n\t{\n\t\tthis.start = start;\n\t\tthis.end = end;\n\t}\n\tpublic void printNumbers()\n\t{\n\t\tfor(int i=start; i<=end; i++)\n\t\t{\n\t\t\tSystem.out.println(i);\n\t\t}\n\t}\n}"
+        },
+        "Arrays":{
+            "discription": "The Array Program In Java",
+            "code": "// This program will print the numbers from 1 to 10.\npublic class Array\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tint[] numbers = new int[10];\n\t\tfor(int i=0; i<numbers.length; i++)\n\t\t{\n\t\t\tnumbers[i] = i+1;\n\t\t}\n\t\tfor(int i=0; i<numbers.length; i++)\n\t\t{\n\t\t\tSystem.out.println(numbers[i]);\n\t\t}\n\t}\n}"
         }
     }
 }
