@@ -10,7 +10,10 @@
     ],
     "programlist": [
         "Hello World",
-        "FizzBuzz"
+        "FizzBuzz",
+        "Arithimetic Operators",
+        "Conditional Statements",
+        "Loops"
     ],
     "JavaScript": {
         "Hello World": {
@@ -20,42 +23,150 @@
         "FizzBuzz": {
             "discription": "The FizzBuzz Program In JavaScript",
             "code": "// This program will print the numbers from 1 to 100. If the number is divisible by 3, it will print \"Fizz\". If the number is divisible by 5, it will print \"Buzz\". If the number is divisible by both 3 and 5, it will print \"FizzBuzz\".\nfor(var i=1; i<=100; i++){\n\tif(i%3==0 && i%5==0) {\n\t\tconsole.log(\"FizzBuzz\");\n\t}\n\telse if(i%3==0){\n\t\tconsole.log(\"Fizz\");\n\t}\n\telse if(i%5==0){\n\t\tconsole.log(\"Buzz\");\n\t}\n\telse{\n\t\tconsole.log(i);\n\t}\n}\n"
+        },
+        "Arithimetic Operators": {
+            "discription": "The Arithimetic Operators Program In JavaScript",
+            "code": "// This program will print the sum of two numbers.\nvar num1 = 5;\nvar num2 = 10;\nvar sum = num1 + num2;\nconsole.log(\"The sum of \" + num1 + \" and \" + num2 + \" is \" + sum);"
+        }, 
+        "Conditional Statements":{
+            "discription": "The Conditional Statements Program In JavaScript",
+            "code" : "// This program will compare two numbers and print the larger number.\nvar num1 = 5;\nvar num2 = 10;\nif(num1 > num2){\n\tconsole.log(\"The larger number is \" + num1);\n}\nelse{\n\tconsole.log(\"The larger number is \" + num2);\n}\n"
+        },
+        "Loops":{
+            "discription": "The Loops Program In JavaScript",
+            "code": "// This program will print the numbers from 1 to 10.\nfor(var i=1; i<=10; i++){\n\tconsole.log(i);\n}\n"
         }
     },
     "TypeScript": {
         "Hello World": {
             "discription": "The Hello World Program In TypeScript",
             "code": "// This program will print the string \"Hello World\" to the console, written in TypeScript.\nconsole.log(\"Hello World\");"
+        },
+        "FizzBuzz": {
+            "discription": "The FizzBuzz Program In TypeScript",
+            "code": "// This program will print the numbers from 1 to 100. If the number is divisible by 3, it will print \"Fizz\". If the number is divisible by 5, it will print \"Buzz\". If the number is divisible by both 3 and 5, it will print \"FizzBuzz\".\nfor(var i=1; i<=100; i++){\n\tif(i%3==0 && i%5==0) {\n\t\tconsole.log(\"FizzBuzz\");\n\t}\n\telse if(i%3==0){\n\t\tconsole.log(\"Fizz\");\n\t}\n\telse if(i%5==0){\n\t\tconsole.log(\"Buzz\");\n\t}\n\telse{\n\t\tconsole.log(i);\n\t}\n}\n"
+        },
+        "Arithimetic Operators": {
+            "discription": "The Arithimetic Operators Program In TypeScript",
+            "code": "// This program will print the sum of two numbers.\nvar num1 = 5;\nvar num2 = 10;\nvar sum = num1 + num2;\nconsole.log(\"The sum of \" + num1 + \" and \" + num2 + \" is \" + sum);"
+        },
+        "Conditional Statements":{
+            "discription": "The Conditional Statements Program In TypeScript",
+            "code" : "// This program will compare two numbers and print the larger number.\nvar num1 = 5;\nvar num2 = 10;\nif(num1 > num2){\n\tconsole.log(\"The larger number is \" + num1);\n}\nelse{\n\tconsole.log(\"The larger number is \" + num2);\n}\n"
+        },
+        "Loops":{
+            "discription": "The Loops Program In TypeScript",
+            "code": "// This program will print the numbers from 1 to 10.\nfor(var i=1; i<=10; i++){\n\tconsole.log(i);\n}\n"
         }
     },
     "C": {
         "Hello World": {
             "discription": "The Hello World Program In C",
             "code": "// This program will print the string \"Hello World\" to the console, written in C.\n#include <stdio.h>\nint main()\n{\n\tprintf(\"Hello World\\n\");\n\treturn 0;\n}"
+        },
+        "FizzBuzz":{
+            "discription": "The FizzBuzz Program In C",
+            "code": "// This program will print the numbers from 1 to 100. If the number is divisible by 3, it will print \"Fizz\". If the number is divisible by 5, it will print \"Buzz\". If the number is divisible by both 3 and 5, it will print \"FizzBuzz\".\n#include <stdio.h>\nint main()\n{\n\tfor(int i=1; i<=100; i++)\n\t{\n\t\tif(i%3==0 && i%5==0)\n\t\t{\n\t\t\tprintf(\"FizzBuzz\\n\");\n\t\t}\n\t\telse if(i%3==0)\n\t\t{\n\t\t\tprintf(\"Fizz\\n\");\n\t\t}\n\t\telse if(i%5==0)\n\t\t{\n\t\t\tprintf(\"Buzz\\n\");\n\t\t}\n\t\telse\n\t\t{\n\t\t\tprintf(\"%d\\n\", i);\n\t\t}\n\t}\n\treturn 0;\n}"
+        },
+        "Arithimetic Operators": {
+            "discription": "The Arithimetic Operators Program In C",
+            "code": "// This program will print the sum of two numbers.\n#include <stdio.h>\nint main()\n{\n\tint num1, num2, sum;\n\tprintf(\"Enter the first number: \");\n\tscanf(\"%d\", &num1);\n\tprintf(\"Enter the second number: \");\n\tscanf(\"%d\", &num2);\n\tsum = num1 + num2;\n\tprintf(\"The sum of %d and %d is %d\\n\", num1, num2, sum);\n\treturn 0;\n}"
+        },
+        "Conditional Statements":{
+            "discription": "The Conditional Statements Program In C",
+            "code" : "// This program will compare two numbers and print the larger number.\n#include <stdio.h>\nint main()\n{\n\tint num1, num2;\n\tprintf(\"Enter the first number: \");\n\tscanf(\"%d\", &num1);\n\tprintf(\"Enter the second number: \");\n\tscanf(\"%d\", &num2);\n\tif(num1 > num2)\n\t{\n\t\tprintf(\"The larger number is %d\\n\", num1);\n\t}\n\telse\n\t{\n\t\tprintf(\"The larger number is %d\\n\", num2);\n\t}\n\treturn 0;\n}"
+        },
+        "Loops":{
+            "discription": "The Loops Program In C",
+            "code": "// This program will print the numbers from 1 to 10.\n#include <stdio.h>\nint main()\n{\n\tfor(int i=1; i<=10; i++)\n\t{\n\t\tprintf(\"%d\\n\", i);\n\t}\n\treturn 0;\n}"
         }
     },
     "C++": {
         "Hello World": {
             "discription": "The Hello World Program In C++",
             "code": "// This program will print the string \"Hello World\" to the console, written in C++.\n#include <iostream>\nint main()\n{\n\tcout << \"Hello World\" << endl;\n\treturn 0;\n}"
+        },
+        "FizzBuzz":{
+            "discription": "The FizzBuzz Program In C++",
+            "code": "// This program will print the numbers from 1 to 100. If the number is divisible by 3, it will print \"Fizz\". If the number is divisible by 5, it will print \"Buzz\". If the number is divisible by both 3 and 5, it will print \"FizzBuzz\".\n#include <iostream>\nint main()\n{\n\tfor(int i=1; i<=100; i++)\n\t{\n\t\tif(i%3==0 && i%5==0)\n\t\t{\n\t\t\tcout << \"FizzBuzz\" << endl;\n\t\t}\n\t\telse if(i%3==0)\n\t\t{\n\t\t\tcout << \"Fizz\" << endl;\n\t\t}\n\t\telse if(i%5==0)\n\t\t{\n\t\t\tcout << \"Buzz\" << endl;\n\t\t}\n\t\telse\n\t\t{\n\t\t\tcout << i << endl;\n\t\t}\n\t}\n\treturn 0;\n}"
+        },
+        "Arithimetic Operators": {
+            "discription": "The Arithimetic Operators Program In C++",
+            "code": "// This program will print the sum of two numbers.\n#include <iostream>\nint main()\n{\n\tint num1, num2, sum;\n\tcout << \"Enter the first number: \" << endl;\n\tcin >> num1;\n\tcout << \"Enter the second number: \" << endl;\n\tcin >> num2;\n\tsum = num1 + num2;\n\tcout << \"The sum of \" << num1 << \" and \" << num2 << \" is \" << sum << endl;\n\treturn 0;\n}"
+        },
+        "Conditional Statements":{
+            "discription": "The Conditional Statements Program In C++",
+            "code" : "// This program will compare two numbers and print the larger number.\n#include <iostream>\nint main()\n{\n\tint num1, num2;\n\tcout << \"Enter the first number: \" << endl;\n\tcin >> num1;\n\tcout << \"Enter the second number: \" << endl;\n\tcin >> num2;\n\tif(num1 > num2)\n\t{\n\t\tcout << \"The larger number is \" << num1 << endl;\n\t}\n\telse\n\t{\n\t\tcout << \"The larger number is \" << num2 << endl;\n\t}\n\treturn 0;\n}"
+        },
+        "Loops":{
+            "discription": "The Loops Program In C++",
+            "code": "// This program will print the numbers from 1 to 10.\n#include <iostream>\nint main()\n{\n\tfor(int i=1; i<=10; i++)\n\t{\n\t\tcout << i << endl;\n\t}\n\treturn 0;\n}"
         }
     },
     "C#": {
         "Hello World": {
             "discription": "The Hello World Program In C#",
             "code": "// This program will print the string \"Hello World\" to the console, written in C#.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tConsole.WriteLine(\"Hello World\");\n\t}\n}"
+        },
+        "FizzBuzz":{
+            "discription": "The FizzBuzz Program In C#",
+            "code": "// This program will print the numbers from 1 to 100. If the number is divisible by 3, it will print \"Fizz\". If the number is divisible by 5, it will print \"Buzz\". If the number is divisible by both 3 and 5, it will print \"FizzBuzz\".\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tfor(int i=1; i<=100; i++)\n\t\t{\n\t\t\tif(i%3==0 && i%5==0)\n\t\t\t{\n\t\t\t\tConsole.WriteLine(\"FizzBuzz\");\n\t\t\t}\n\t\t\telse if(i%3==0)\n\t\t\t{\n\t\t\t\tConsole.WriteLine(\"Fizz\");\n\t\t\t}\n\t\t\telse if(i%5==0)\n\t\t\t{\n\t\t\t\tConsole.WriteLine(\"Buzz\");\n\t\t\t}\n\t\t\telse\n\t\t\t{\n\t\t\t\tConsole.WriteLine(i);\n\t\t\t}\n\t\t}\n\t}\n}"
+        },
+        "Arithimetic Operators": {
+            "discription": "The Arithimetic Operators Program In C#",
+            "code": "// This program will print the sum of two numbers.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tint num1, num2, sum;\n\t\tConsole.WriteLine(\"Enter the first number: \" );\n\t\tnum1 = Convert.ToInt32(Console.ReadLine());\n\t\tConsole.WriteLine(\"Enter the second number: \" );\n\t\tnum2 = Convert.ToInt32(Console.ReadLine());\n\t\tsum = num1 + num2;\n\t\tConsole.WriteLine(\"The sum of \" + num1 + \" and \" + num2 + \" is \" + sum);\n\t}\n}"
+        },
+        "Conditional Statements":{
+            "discription": "The Conditional Statements Program In C#",
+            "code" : "// This program will compare two numbers and print the larger number.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tint num1, num2;\n\t\tConsole.WriteLine(\"Enter the first number: \" );\n\t\tnum1 = Convert.ToInt32(Console.ReadLine());\n\t\tConsole.WriteLine(\"Enter the second number: \" );\n\t\tnum2 = Convert.ToInt32(Console.ReadLine());\n\t\tif(num1 > num2)\n\t\t{\n\t\t\tConsole.WriteLine(\"The larger number is \" + num1);\n\t\t}\n\t\telse\n\t\t{\n\t\t\tConsole.WriteLine(\"The larger number is \" + num2);\n\t\t}\n\t}\n}"
+        },
+        "Loops":{
+            "discription": "The Loops Program In C#",
+            "code": "// This program will print the numbers from 1 to 10.\nusing System;\nclass Program\n{\n\tstatic void Main(string[] args)\n\t{\n\t\tfor(int i=1; i<=10; i++)\n\t\t{\n\t\t\tConsole.WriteLine(i);\n\t\t}\n\t}\n}"
         }
     },
     "Python": {
         "Hello World": {
             "discription": "The Hello World Program In Python",
             "code": "// This program will print the string \"Hello World\" to the console, written in Python.\nprint(\"Hello World\")"
+        },
+        "FizzBuzz":{
+            "discription": "The FizzBuzz Program In Python",
+            "code": "// This program will print the numbers from 1 to 100. If the number is divisible by 3, it will print \"Fizz\". If the number is divisible by 5, it will print \"Buzz\". If the number is divisible by both 3 and 5, it will print \"FizzBuzz\".\nfor i in range(1,101):\n\tif i%3==0 and i%5==0:\n\t\tprint(\"FizzBuzz\")\n\telif i%3==0:\n\t\tprint(\"Fizz\")\n\telif i%5==0:\n\t\tprint(\"Buzz\")\n\telse:\n\t\tprint(i)"
+        },
+        "Arithimetic Operators": {
+            "discription": "The Arithimetic Operators Program In Python",
+            "code": "// This program will print the sum of two numbers.\nnum1 = int(input(\"Enter the first number: \"))\nnum2 = int(input(\"Enter the second number: \"))\nsum = num1 + num2\nprint(\"The sum of \" + str(num1) + \" and \" + str(num2) + \" is \" + str(sum))"
+        },
+        "Conditional Statements":{
+            "discription": "The Conditional Statements Program In Python",
+            "code" : "// This program will compare two numbers and print the larger number.\nnum1 = int(input(\"Enter the first number: \"))\nnum2 = int(input(\"Enter the second number: \"))\nif num1 > num2:\n\tprint(\"The larger number is \" + str(num1))\nelif num2 > num1:\n\tprint(\"The larger number is \" + str(num2))\nelse:\n\tprint(\"The numbers are equal\")"
+        },
+        "Loops":{
+            "discription": "The Loops Program In Python",
+            "code": "// This program will print the numbers from 1 to 10.\nfor i in range(1,11):\n\tprint(i)"
         }
     },
     "Java": {
         "Hello World": {
             "discription": "The Hello World Program In Java",
             "code": "// This program will print the string \"Hello World\" to the console, written in Java.\npublic class HelloWorld\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tSystem.out.println(\"Hello World\");\n\t}\n}"
+        },
+        "FizzBuzz":{
+            "discription": "The FizzBuzz Program In Java",
+            "code": "// This program will print the numbers from 1 to 100. If the number is divisible by 3, it will print \"Fizz\". If the number is divisible by 5, it will print \"Buzz\". If the number is divisible by both 3 and 5, it will print \"FizzBuzz\".\npublic class FizzBuzz\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tfor(int i=1; i<=100; i++)\n\t\t{\n\t\t\tif(i%3==0 && i%5==0)\n\t\t\t{\n\t\t\t\tSystem.out.println(\"FizzBuzz\");\n\t\t\t}\n\t\t\telse if(i%3==0)\n\t\t\t{\n\t\t\t\tSystem.out.println(\"Fizz\");\n\t\t\t}\n\t\t\telse if(i%5==0)\n\t\t\t{\n\t\t\t\tSystem.out.println(\"Buzz\");\n\t\t\t}\n\t\t\telse\n\t\t\t{\n\t\t\t\tSystem.out.println(i);\n\t\t\t}\n\t\t}\n\t}\n}"
+        },
+        "Arithimetic Operators": {
+            "discription": "The Arithimetic Operators Program In Java",
+            "code": "// This program will print the sum of two numbers.\npublic class ArithimeticOperators\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tint num1, num2, sum;\n\t\tSystem.out.println(\"Enter the first number: \" );\n\t\tnum1 = Integer.parseInt(System.console().readLine());\n\t\tSystem.out.println(\"Enter the second number: \" );\n\t\tnum2 = Integer.parseInt(System.console().readLine());\n\t\tsum = num1 + num2;\n\t\tSystem.out.println(\"The sum of \" + num1 + \" and \" + num2 + \" is \" + sum);\n\t}\n}"
+        },
+        "Conditional Statements":{
+            "discription": "The Conditional Statements Program In Java",
+            "code" : "// This program will compare two numbers and print the larger number.\npublic class ConditionalStatements\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tint num1, num2;\n\t\tSystem.out.println(\"Enter the first number: \" );\n\t\tnum1 = Integer.parseInt(System.console().readLine());\n\t\tSystem.out.println(\"Enter the second number: \" );\n\t\tnum2 = Integer.parseInt(System.console().readLine());\n\t\tif(num1 > num2)\n\t\t{\n\t\t\tSystem.out.println(\"The larger number is \" + num1);\n\t\t}\n\t\telse if(num2 > num1)\n\t\t{\n\t\t\tSystem.out.println(\"The larger number is \" + num2);\n\t\t}\n\t\telse\n\t\t{\n\t\t\tSystem.out.println(\"The numbers are equal\");\n\t\t}\n\t}\n}"
+        },
+        "Loops":{
+            "discription": "The Loops Program In Java",
+            "code": "// This program will print the numbers from 1 to 10.\npublic class Loops\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tfor(int i=1; i<=10; i++)\n\t\t{\n\t\t\tSystem.out.println(i);\n\t\t}\n\t}\n}"
         }
     }
 }
