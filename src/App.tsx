@@ -4,6 +4,8 @@ import './App.css'
 import app from './init'
 import Navbar from '../components/Navbar/Navbar'
 import Data from './data.json'
+import KeySound1 from './key1.mp3'
+import KeySound2 from './key2.mp3'
 declare interface CodeBlock {
   character: string
   // Here C = yes the chracter has been attempted and correct # Currect
@@ -14,12 +16,15 @@ declare interface CodeBlock {
 }
 function App() {
   const initText = "Hello There!\nWelcome to TyperX, Learn By Typing\nYou Can Either Select A Perticular Programming Language And A Program Or You Can Start Typing This Paragraph As Well"
+  const [time, setTime] = useState(0);
+  var timerStart = useRef(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [code, setCode] = useState(initText)
   const [codeMap, setCodeMap] = useState<CodeBlock[]>([])
   const [codeText, setCodeText] = useState("")
   const [languages, setLanguages] = useState<string[]>([])
   const [programs, setPrograms] = useState<string[]>([])
-  const [currentLanguage, setCurrentLanguage] = useState("")
+  const [currentLanguage, setCurrentLanguage] = useState("JavaScript")
   const [currentProgram, setCurrentProgram] = useState("")
   const [description, setDescription] = useState("")
   var currentIndexRef = useRef(0)
@@ -52,11 +57,14 @@ function App() {
     // without api
     setLanguages(Data['languages'])
     setPrograms(Data['programlist'])
+
+    // document.addEventListener("mousedown", playMouseSound)
   }, [])
 
   // use effect whever the code string changes
   useEffect(() => {
     // Make the code map from code string 
+    console.log("called")
     let tempCodeMap: CodeBlock[] = []
     code.split("").forEach((char) => {
       // current code block 
@@ -81,7 +89,8 @@ function App() {
 
 
   // set the code and codeBlocks
-  const setInit = ()=>{
+  const setInit = () => {
+    currentIndexRef.current = 0
     if (currentLanguage && currentProgram) {
       // fetch("/src/data.json").then((res) => {
       //   res.json().then((data) => {
@@ -103,6 +112,7 @@ function App() {
       return
     }
     if (currentIndex < codeMap.length - 1) {
+      playSound()
       if (e.key === "Tab") {
         e.preventDefault()
         if (codeMap[currentIndex].character === "\t") {
@@ -131,10 +141,14 @@ function App() {
 
       }
     } else {
-      if (e.key === codeMap[currentIndex].character) {
-        codeMap[currentIndex].status = "C"
-      } else {
-        codeMap[currentIndex].status = "I"
+      if (e.key) {
+        playSound()
+        if (e.key === codeMap[currentIndex].character) {
+          codeMap[currentIndex].status = "C"
+        } else {
+          codeMap[currentIndex].status = "I"
+        }
+        modelRef.current.classList.add("is-active")
       }
     }
 
@@ -142,10 +156,32 @@ function App() {
   }
 
   const handleReset = () => {
+    modelCloseButtonRef.current.click();
     currentIndexRef.current = 0
-    setCode(' ')
     setCodeText(' ')
+    codeMap.forEach(codeBlock => { codeBlock.status = 'U' })
+    codeMap[0].status = 'R'
     setInit()
+  }
+
+  const playSound = () => {
+    // set audio position to 0    
+    try{
+      audioRef.current!.pause()
+      audioRef.current!.currentTime = 0
+      audioRef.current!.play()
+    }catch(e){}
+  }
+
+  // const playMouseSound = () => {
+  //   audioRef.current!.src = KeySound1
+  //   audioRef.current!.pause()
+  //   audioRef.current!.currentTime = 0
+  //   audioRef.current!.play()
+  // }
+
+  const loadNextProgram = () => {
+    setCurrentProgram(Data["programlist"][Data["programlist"].indexOf(currentProgram) + 1 === Data["programlist"].length ? 0 : Data["programlist"].indexOf(currentProgram) + 1]); modelCloseButtonRef.current.click()
   }
 
   return (
@@ -154,12 +190,15 @@ function App() {
       <div className="hero is-small">
         <br />
         <div className="container">
-          <div className="columns">
+          <div className="columns is-vcentered is-multiline">
+            <div className="column">
+              <div className='title is-5'>{time + "s"}</div>
+            </div>
             <div className="column">
               <div className="control has-icons-left">
                 <div className="select">
                   <select value={currentLanguage} onChange={(e) => { setCurrentLanguage(e.target.value) }}>
-                    <option value={""}>Select Language</option>
+                    <option value={"JavaScript"}>Select Language</option>
                     {
                       languages.map((language, index) => {
                         return <option key={index}>{language}</option>
@@ -168,7 +207,7 @@ function App() {
                   </select>
                 </div>
                 <div className="icon is-small is-left">
-                  <p>🖥️</p>
+                  <p>⌨️</p>
                 </div>
               </div>
             </div>
@@ -203,7 +242,7 @@ function App() {
             if (codeBlock.character === "\n") {
               return <span key={index} className={`subtitle is-5 ${codeBlock.status == "C" ? "has-background-success has-text-light" : codeBlock.status == "I" ? "has-background-danger has-text-light" : codeBlock.status == "R" ? "current has-background-warning has-text-white" : "has-background-white has-text-black"}`}>  <br /> </span>
             } else if (codeBlock.character === " ") {
-              return <span key={index} className={`subtitle is-5 ${codeBlock.status == "C" ? "has-background-success has-text-light" : codeBlock.status == "I" ? "has-background-danger has-text-light" : codeBlock.status == "R" ? "current has-background-warning has-text-white" : "has-background-white has-text-black"}`}>&nbsp;</span>
+              return <span key={index} className={`subtitle is-5 ${codeBlock.status == "C" ? "has-background-success has-text-light" : codeBlock.status == "I" ? "has-background-danger has-text-light" : codeBlock.status == "R" ? "current has-background-warning has-text-white" : "has-background-white has-text-black"}`}>&nbsp;&nbsp;&nbsp;</span>
             } else if (codeBlock.character === "\t") {
               return <span key={index} className={`subtitle is-5 ${codeBlock.status == "C" ? "has-background-success has-text-light" : codeBlock.status == "I" ? "has-background-danger has-text-light" : codeBlock.status == "R" ? "current has-background-warning has-text-white" : "has-background-white has-text-black"}`}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             } else {
@@ -227,10 +266,10 @@ function App() {
             <h1 className="title is-1 py-4">Test Completed!</h1>
             <h2 className="subtitle">
               <div className="buttons has-addons">
-                <button className="button is-medium is-primary">
+                <button className="button is-medium is-primary" onClick={()=>{handleReset();}}>
                   Retry 🔃
                 </button>
-                <button className="button is-medium is-success">
+                <button className="button is-medium is-success" onClick={loadNextProgram}>
                   Next ⏭️
                 </button>
               </div>
@@ -239,7 +278,7 @@ function App() {
         </div>
         <button className="modal-close is-large" aria-label="close" onClick={() => { modelRef.current.classList.remove("is-active") }} ref={modelCloseButtonRef}></button>
       </div>
-
+      <audio controls={false} src={KeySound2} ref={audioRef}></audio>
     </>
   )
 }
