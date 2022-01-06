@@ -12,5 +12,7 @@ TyperX is a website that helps you learn the code by writting it.
 ### How many programming languages does TyperX support?
 Right now, TyperX supports only Python, Java, C++, C, C#, TypeScript and JavaScript.
 
+### I don't have enought time to work on this because exams are close, so just making it opensource
+
 Made By Vedik Dev - <a href="https://github.com/himanshurajora">Himanshu Jangid</a>
 Thanks For Reading 
