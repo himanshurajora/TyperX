@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar/Navbar'
 import Data from './data.json'
 import KeySound1 from './key1.mp3'
 import KeySound2 from './key2.mp3'
+import { useParams } from 'react-router-dom'
 declare interface CodeBlock {
   character: string
   // Here C = yes the chracter has been attempted and correct # Currect
@@ -14,6 +15,8 @@ declare interface CodeBlock {
   // R = THe charater that has to be written right now or the current index # current index
   status: "C" | "I" | "U" | "R"
 }
+declare type Paths = "Basic" | "DataStructures" | "Algorithms"
+const PossiblePaths: Paths[] = ["Basic", "DataStructures", "Algorithms"]
 function App() {
   const initText = "Hello There!\nWelcome to TyperX, Learn By Typing\nYou Can Either Select A Perticular Programming Language And A Program Or You Can Start Typing This Paragraph As Well"
   const [time, setTime] = useState(0);
@@ -32,6 +35,10 @@ function App() {
   var modelRef = useRef<any>()
   var modelCloseButtonRef = useRef<any>()
   var textArea = useRef<any>()
+
+  // Router
+  var { path } = useParams()
+  var [currentPath, setCurrentPath] = useState<Paths>(path as any)
   const ignoredKeys = [
     "Shift",
     "Control",
@@ -45,6 +52,18 @@ function App() {
     "ArrowDown",
   ]
 
+  useEffect(() => {
+    if (path) {
+      if (PossiblePaths.includes(path as Paths)) {
+        setCurrentPath(path as Paths)
+      }else{
+        setCurrentPath("Basic")
+      }
+    }else{
+      setCurrentPath("Basic")
+    }
+  }, [])
+
   // use effect of first load
   useEffect(() => {
     // with api
@@ -56,15 +75,13 @@ function App() {
     // })
     // without api
     setLanguages(Data['languages'])
-    setPrograms(Data['programlist'])
-
+    setPrograms(Data[currentPath]['programlist'])
     // document.addEventListener("mousedown", playMouseSound)
-  }, [])
+  }, [path])
 
   // use effect whever the code string changes
   useEffect(() => {
     // Make the code map from code string 
-    console.log("called")
     let tempCodeMap: CodeBlock[] = []
     code.split("").forEach((char) => {
       // current code block 
@@ -98,9 +115,8 @@ function App() {
       //     setDescription(data[currentLanguage][currentProgram]['description'])
       //   })
       // })
-      // console.log(Data)
-      setCode((Data as any)[currentLanguage][currentProgram]['code'])
-      setDescription((Data as any)[currentLanguage][currentProgram]['description'])
+      setCode((Data as any)['Programs'][currentPath][currentLanguage][currentProgram]['code'])
+      setDescription((Data as any)['Programs'][currentPath][currentLanguage][currentProgram]['description'])
     }
     textArea.current.focus()
   }
@@ -166,11 +182,11 @@ function App() {
 
   const playSound = () => {
     // set audio position to 0    
-    try{
+    try {
       audioRef.current!.pause()
       audioRef.current!.currentTime = 0
       audioRef.current!.play()
-    }catch(e){}
+    } catch (e) { }
   }
 
   // const playMouseSound = () => {
@@ -181,7 +197,7 @@ function App() {
   // }
 
   const loadNextProgram = () => {
-    setCurrentProgram(Data["programlist"][Data["programlist"].indexOf(currentProgram) + 1 === Data["programlist"].length ? 0 : Data["programlist"].indexOf(currentProgram) + 1]); modelCloseButtonRef.current.click()
+    setCurrentProgram(Data[currentPath]["programlist"][Data[currentPath]["programlist"].indexOf(currentProgram) + 1 === Data[currentPath]["programlist"].length ? 0 : Data[currentPath]["programlist"].indexOf(currentProgram) + 1]); modelCloseButtonRef.current.click()
   }
 
   return (
@@ -266,7 +282,7 @@ function App() {
             <h1 className="title is-1 py-4">Test Completed!</h1>
             <h2 className="subtitle">
               <div className="buttons has-addons">
-                <button className="button is-medium is-primary" onClick={()=>{handleReset();}}>
+                <button className="button is-medium is-primary" onClick={() => { handleReset(); }}>
                   Retry 🔃
                 </button>
                 <button className="button is-medium is-success" onClick={loadNextProgram}>
