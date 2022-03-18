@@ -214,12 +214,12 @@ function App() {
               <div className="control has-icons-left">
                 <div className="select">
                   <select value={currentLanguage} onChange={(e) => { setCurrentLanguage(e.target.value) }}>
-                    <option value={"JavaScript"}>Select Language</option>
-                    {
+                    <option value={"JavaScript"}>Default JavaScript</option>
+                    {/* {
                       languages.map((language, index) => {
                         return <option key={index}>{language}</option>
                       })
-                    }
+                    } */}
                   </select>
                 </div>
                 <div className="icon is-small is-left">

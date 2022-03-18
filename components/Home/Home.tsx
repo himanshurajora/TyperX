@@ -23,7 +23,7 @@ export default function Home() {
                             {/* Basic */}
                             <option value="Basic">Basic</option>
                             {/* Data Structures */}
-                            {/* <option value="DataStructures">Data Structures</option> */}
+                            <option value="DataStructures">Data Structures</option>
                             {/* Algorithms */}
                             {/* <option value="Algorithms">Algorithms</option> */}
                         </select>

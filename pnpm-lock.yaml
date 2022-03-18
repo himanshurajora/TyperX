@@ -8,6 +8,7 @@ specifiers:
   react: ^17.0.2
   react-dom: ^17.0.2
   react-router-dom: ^6.2.1
+  typerxparser: ^0.0.21
   typescript: ^4.4.4
   vite: ^2.7.2
 
@@ -21,6 +22,7 @@ devDependencies:
   '@types/react': 17.0.38
   '@types/react-dom': 17.0.11
   '@vitejs/plugin-react': 1.1.3
+  typerxparser: 0.0.21
   typescript: 4.5.4
   vite: 2.7.10
 
@@ -1627,6 +1629,10 @@ packages:
   /tslib/2.3.1:
     resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
     dev: false
+
+  /typerxparser/0.0.21:
+    resolution: {integrity: sha512-BUFNMoIJ3mnijlTmwL1tttdkPSPy//aQMTEIl+rRxrIuBq2etBE4ozKejDS//L0nI8j4njMiXyzzIVG2Rivzow==}
+    dev: true
 
   /typescript/4.5.4:
     resolution: {integrity: sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==}
